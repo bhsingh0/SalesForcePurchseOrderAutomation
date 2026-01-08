@@ -1,18 +1,56 @@
-# Salesforce DX Project: Next Steps
+# Salesforce Purchase Order Automation
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+## Overview
+This project demonstrates an **end-to-end automation of the Purchase Order (PO) process** in Salesforce, including **record-triggered flows, manager approvals, reports & dashboards, and metadata-driven deployment using Salesforce CLI and Git**.  
 
-## How Do You Plan to Deploy Your Changes?
+The project is designed to **reduce manual work, improve approval speed, and provide real-time visibility** for managers and stakeholders. It showcases the integration of **CRM automation with Agile project delivery principles**.
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+---
 
-## Configure Your Salesforce DX Project
+## Features / Components
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+### 1. Custom Objects : Refer Objects folder
+- **Purchase_Order__c**  
+  - Fields: `Status__c`, `Requested_By__c`, `PO_Amount__c`, `Approval_Comments__c`, etc.
+  - Tracks individual purchase orders through the approval lifecycle.
 
-## Read All About It
+### 2. Record-Triggered Flow: Refer flow folder
+- Automatically updates PO status when a new PO is created or updated.
+- Flow logic:  
+  `Submitted → Pending Approval → Approved / Rejected`
+- Reduces manual updates and ensures consistency.
 
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+### 3. Manager Approval Process
+- Conditional routing based on PO amount or department.
+- Ensures approvals are **tracked, timely, and accountable**.
+- Sends notifications to relevant stakeholders.
+
+### 4. Reports & Dashboards
+- Provides real-time insights into:
+  - Pending approvals
+  - Total POs by status
+  - Financial exposure
+- Supports **data-driven decision making**.
+
+### 5. Metadata-Driven Deployment
+- Project organized using **Salesforce DX structure**.
+- Deployable via **Salesforce CLI (`sf project deploy`)**.
+- Version-controlled in Git for **repeatable, UI-free deployments** across environments.
+
+---
+
+## Installation / Deployment
+```bash
+1. Clone the repository
+git clone <your-repo-url>
+cd PO_POC
+
+2. Authorize your Salesforce Org
+sf login org --web
+
+3. Deploy metadata to your org
+sf project deploy start --source-dir force-app/main/default --target-org MyPOOrg
+
+4. Verify objects, flows, and approval processes in Salesforce UI.
+
+
