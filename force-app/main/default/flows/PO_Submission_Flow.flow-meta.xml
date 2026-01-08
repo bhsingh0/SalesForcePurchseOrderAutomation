@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>PO Submission Flow</label>
+    <processMetadataValues/>
+    <status>Active</status>
+    <triggerType>Record</triggerType>
+    <recordTriggerType>CreatedOrUpdated</recordTriggerType>
+    <triggerObject>Purchase_Order__c</triggerObject>
+    <conditionLogic>AND</conditionLogic>
+    <conditions>
+        <field>Status__c</field>
+        <operator>equals</operator>
+        <value>Submitted</value>
+    </conditions>
+    <actions>
+        <actionType>UpdateRecords</actionType>
+        <name>Update_PO_Status</name>
+        <label>Update PO Status</label>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>Pending Approval</value>
+        </inputAssignments>
+        <targetReference>RecordThatTriggeredTheFlow</targetReference>
+    </actions>
+</Flow>
